@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace A04Examples
+namespace jvd309
 {
     [RequireComponent(typeof(Collider))]
     public class MovingDestination : MonoBehaviour, IPointerClickHandler
