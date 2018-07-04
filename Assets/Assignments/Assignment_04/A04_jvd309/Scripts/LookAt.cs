@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace jvd309 {
+namespace jvd309
+{
     public class LookAt : MonoBehaviour
     {
 

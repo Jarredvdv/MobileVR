@@ -10,7 +10,6 @@ namespace A04Examples
     {
         [Tooltip("How long does the player need to get here")]
         public float RequiredMovingTime;
-
         private Collider _collider;
 
 		private void Start()
