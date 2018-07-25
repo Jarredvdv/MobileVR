@@ -41,7 +41,11 @@ namespace jvd309
                 {
                     Vector3 forward = Camera.main.transform.forward;
                     forward.y = 0;
+<<<<<<< HEAD
                     transform.Translate(forward / speed * Time.deltaTime);
+=======
+                    transform.Translate(forward * speed * Time.deltaTime);
+>>>>>>> bd5777b329ae63e28eaeb8959c27e8c3583a0852
                 }
             }
             else if (isMoving && easingMovement)

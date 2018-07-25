@@ -10,6 +10,7 @@ namespace jvd309
     {
         [Tooltip("How long does the player need to get here")]
         public float RequiredMovingTime;
+<<<<<<< HEAD
         RaycastHit hit;
         float hitDistance;
         private Collider _collider;
@@ -45,11 +46,30 @@ namespace jvd309
                 //PlayerController.Instance.MoveToPosition(forwardPos, RequiredMovingTime);
             }
 
+=======
+
+        private Collider _collider;
+
+		private void Start()
+		{
+            _collider = GetComponent<Collider>();
+
+		}
+
+		void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+        {
+            PlayerController.Instance.MoveToPosition(transform.position, RequiredMovingTime);
+            Debug.Log(_collider);
+>>>>>>> bd5777b329ae63e28eaeb8959c27e8c3583a0852
         }
 
 
 		private void OnTriggerEnter(Collider other)
 		{
+<<<<<<< HEAD
+=======
+            Debug.Log("HERE2");
+>>>>>>> bd5777b329ae63e28eaeb8959c27e8c3583a0852
             //Disable the collision detection on this collider when the camera is inside of it, so the casting ray won't be blocked by it.
             if (other.CompareTag("MainCamera")) {
                 _collider.isTrigger = true;
@@ -58,7 +78,12 @@ namespace jvd309
 
 		private void OnTriggerExit(Collider other)
 		{
+<<<<<<< HEAD
             //Re-enable the collision detection when camera exits the collider
+=======
+            //Re-enable the collision detection when camera exits the collider
+            Debug.Log("HERE3");
+>>>>>>> bd5777b329ae63e28eaeb8959c27e8c3583a0852
             if (other.CompareTag("MainCamera"))
             {
                 _collider.isTrigger = false;
