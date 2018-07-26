@@ -29,10 +29,10 @@ namespace jvd309
         {
             controller = GetComponent<CharacterController>();
 
-            // Set random initial rotation
+            //Initialize random initial rotation
             heading = Random.Range(0, 360);
             transform.eulerAngles = new Vector3(0, heading, 0);
-            StartCoroutine(NewHeading());
+            StartCoroutine(NewHeading());//Start generating new directions
         }
 
         void Update()
@@ -41,7 +41,7 @@ namespace jvd309
             {
                 return;
             }
-
+            //Parabolically interpolates between two vectors, in this case the NPCs old and new rotation
             transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
             forward = transform.TransformDirection(Vector3.forward);
             controller.SimpleMove(forward * speed);
@@ -59,12 +59,11 @@ namespace jvd309
         }
 
         // Calculates a new direction to move towards.
-
         void NewHeadingRoutine()
         {
-            var floor = Mathf.Clamp(heading - maxHeadingChange, 0, 360);
+            var floor = Mathf.Clamp(heading - maxHeadingChange, 0, 360);//Constricts the range of the angle for movement change
             var ceil = Mathf.Clamp(heading + maxHeadingChange, 0, 360);
-            heading = Random.Range(floor, ceil);
+            heading = Random.Range(floor, ceil);//We generate a new direction for the NPC to head in
             targetRotation = new Vector3(0, heading, 0);
         }
 
@@ -88,7 +87,7 @@ namespace jvd309
 
         public override void OnStartServer()
         {
-            InvokeRepeating("CmdFire", 5f, 2f);
+            InvokeRepeating("CmdFire", 5f, 2f);//after 5 seconds, NPCs will shoot every 2 seconds
         }
     }
 }
