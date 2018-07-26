@@ -54,11 +54,18 @@ namespace jvd309
             }
             if (isMoving)
             {
+                //We must update the players position based on the players current velocity
+                var new_pos = new Vector3(cam_pos.forward.x, 0, cam_pos.forward.z);
+                direction = new_pos.normalized * Time.deltaTime;
 
-                direction = new Vector3(cam_pos.forward.x, 0, cam_pos.forward.z).normalized * Time.deltaTime;
+                //We maintain the players current rotation and adjust the Y angle the for the players movement
                 Quaternion rotation = Quaternion.Euler(new Vector3(0, -transform.rotation.eulerAngles.y, 0));
+
+                //We apply the new speed and rotation in the forward direction
                 transform.Translate(rotation * (direction * curSpeed));
                 transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+                //We also specify an interval for the player to shoot while moving 
                 if (Time.time > nextActionTime)
                 {
                     nextActionTime += period;
@@ -66,24 +73,23 @@ namespace jvd309
                 }
             }
 
-            // First we have to rotate the player based on the cardbaord headset
+            //Once we've updated the players speed, we have to rotate the player based on the cardbaord headset
             Vector3 player_rotation = cam_pos.rotation.eulerAngles;
             player_rotation.x = 0;
             player_rotation.z = 0;
             transform.eulerAngles = player_rotation;
 
 
-            // move the player according to input
+
             var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
             transform.Translate(0, 0, z);
 
-            // move the camera to match the player's position
+            //Finally we move the camera to match where the player model is 
             Camera.main.transform.parent.position = transform.Find("Visor").position;
            }
 
 
-        // This [Command] code is called on the Client …
-        // … but it is run on the Server!
+
         [Command]
         void CmdFire()
         {
